@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Balneário Limpa - MVP</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <!-- NAVEGAÇÃO COM ABAS -->
+  <nav class="navbar">
+    <div class="navbar-container">
+      <div class="logo-navbar">♻️ Balneário Limpa</div>
+      <ul class="nav-tabs">
+        <li><button class="tab-btn active" onclick="mostrarAba('app')">📱 MVP</button></li>
+        <li><button class="tab-btn" onclick="mostrarAba('validacao')">✅ Validação</button></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- CABEÇALHO -->
+  <header class="header">
+    <div class="header-content">
+      <div class="logo-section">
+        <h1 class="logo">♻️ Balneário Limpa</h1>
+        <p class="subtitle" id="subtitle-dinamico">Solicite sua coleta de forma sustentável</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================
+       ABA 1: MVP FUNCIONAL
+       ============================================ -->
+  <div id="app" class="aba-content aba-ativa">
+    <!-- CONTEÚDO PRINCIPAL DO MVP -->
+    <main class="main-content">
+      <section class="section mvp-section">
+        <div class="container">
+          <div class="mvp-container">
+            <!-- INTRODUÇÃO -->
+            <div class="mvp-intro">
+              <h2>🌱 Bem-vindo ao Balneário Limpa</h2>
+              <p>Conectando você a coletores de materiais recicláveis da sua região. Solicite sua coleta em poucos passos!</p>
+            </div>
+
+            <!-- FORMULÁRIO DE SOLICITAÇÃO -->
+            <div class="form-container">
+              <h3>📋 Solicitar Coleta</h3>
+              
+              <form onsubmit="return solicitarColeta(event)">
+                <!-- Seleção de resíduo -->
+                <div class="form-group">
+                  <label for="residuo">📦 Tipo de Resíduo:</label>
+                  <select id="residuo" required>
+                    <option value="">Selecione um tipo de resíduo</option>
+                    <option value="plastico">🔵 Plástico</option>
+                    <option value="papel">📄 Papel e Papelão</option>
+                    <option value="vidro">🟢 Vidro</option>
+                    <option value="metal">⚪ Metal e Alumínio</option>
+                  </select>
+                </div>
+
+                <!-- Campo de endereço -->
+                <div class="form-group">
+                  <label for="endereco">📍 Seu Endereço:</label>
+                  <input 
+                    type="text" 
+                    id="endereco" 
+                    placeholder="Digite seu endereço completo"
+                    required
+                  >
+                </div>
+
+                <!-- Campo de telefone -->
+                <div class="form-group">
+                  <label for="telefone">📱 Telefone (WhatsApp):</label>
+                  <input 
+                    type="tel" 
+                    id="telefone" 
+                    placeholder="(XX) 99999-9999"
+                    required
+                  >
+                </div>
+
+                <!-- Botão de envio -->
+                <button type="submit" class="btn-solicitar">
+                  ✅ Solicitar Coleta
+                </button>
+              </form>
+            </div>
+
+            <!-- MENSAGEM DE STATUS -->
+            <div id="status-message" class="status-message"></div>
+
+            <!-- HISTÓRICO DE SOLICITAÇÕES -->
+            <div class="historico-container">
+              <h3>📊 Suas Solicitações</h3>
+              <div id="historico-list" class="historico-list">
+                <p class="empty-message">Nenhuma solicitação realizada ainda</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- INFORMAÇÕES SOBRE O APP -->
+      <section class="section info-section">
+        <div class="container">
+          <h2 class="section-title">❓ Como Funciona</h2>
+          <div class="info-cards">
+            <div class="info-card">
+              <div class="info-number">1️⃣</div>
+              <h4>Solicite</h4>
+              <p>Preencha o formulário com o tipo de resíduo e seu endereço</p>
+            </div>
+            <div class="info-card">
+              <div class="info-number">2️⃣</div>
+              <h4>Confirme</h4>
+              <p>Receba confirmação pelo WhatsApp em poucos minutos</p>
+            </div>
+            <div class="info-card">
+              <div class="info-number">3️⃣</div>
+              <h4>Colete</h4>
+              <p>Um coletor chegará na data e hora agendadas</p>
+            </div>
+            <div class="info-card">
+              <div class="info-number">4️⃣</div>
+              <h4>Sustente</h4>
+              <p>Contribua com o meio ambiente e a comunidade</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- ============================================
+       ABA 2: VALIDAÇÃO DO MVP
+       ============================================ -->
+  <div id="validacao" class="aba-content">
+    <!-- CABEÇALHO VALIDAÇÃO -->
+    <header class="header header-validacao">
+      <div class="header-content">
+        <div class="logo-section">
+          <h1 class="logo">✅ Validação do MVP</h1>
+          <p class="subtitle">Testes com Usuários Reais</p>
+        </div>
+      </div>
+    </header>
+
+    <!-- CONTEÚDO DA VALIDAÇÃO -->
+    <main class="main-content">
+      <!-- CENÁRIO DE APLICAÇÃO -->
+      <section class="section scenario">
+      <div class="container">
+        <h2 class="section-title">Cenário de Aplicação</h2>
+        <div class="cards-grid">
+          <div class="card">
+            <h3>Onde foi testado</h3>
+            <p>O MVP foi testado com moradores e pequenos comércios da região de Balneário Camboriú, que enfrentam dificuldades na separação e coleta de materiais recicláveis.</p>
+          </div>
+          <div class="card">
+            <h3>Público-alvo</h3>
+            <p>Usuários reais que buscam uma solução prática e sustentável para descartar seus resíduos de forma adequada.</p>
+          </div>
+          <div class="card highlight">
+            <h3>Usuários Testados</h3>
+            <p class="number">5 usuários</p>
+            <p class="subtitle-card">Feedback coletado com sucesso</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMO FOI REALIZADO O TESTE -->
+    <section class="section how-to">
+      <div class="container">
+        <h2 class="section-title">Como foi Realizado o Teste</h2>
+        <div class="process-steps">
+          <div class="step">
+            <div class="step-number">1</div>
+            <h3>Apresentação do App</h3>
+            <p>Usuários conheceram a interface e funcionalidades principais do MVP de forma prática.</p>
+          </div>
+          <div class="step">
+            <div class="step-number">2</div>
+            <h3>Simulação de Coleta</h3>
+            <p>Testaram o processo completo de solicitação de coleta de materiais recicláveis.</p>
+          </div>
+          <div class="step">
+            <div class="step-number">3</div>
+            <h3>Avaliação de Usabilidade</h3>
+            <p>Responderam questões sobre facilidade de uso, compreensão e intenção de adoção.</p>
+          </div>
+          <div class="step">
+            <div class="step-number">4</div>
+            <h3>Coleta de Feedback</h3>
+            <p>Forneceram sugestões de melhorias e comentários sobre a experiência geral.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TABELA DE FEEDBACK -->
+    <section class="section feedback-table">
+      <div class="container">
+        <h2 class="section-title">Feedback dos Usuários</h2>
+        <div class="table-wrapper">
+          <table class="feedback-data">
+            <thead>
+              <tr>
+                <th>Usuário</th>
+                <th>Perfil</th>
+                <th>Facilidade de Uso</th>
+                <th>Entendeu o App</th>
+                <th>Usaria Novamente</th>
+                <th>Sugestões</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>João Silva</strong></td>
+                <td>Morador</td>
+                <td><span class="score excellent">Excelente</span></td>
+                <td><span class="yes">✓ Sim</span></td>
+                <td><span class="yes">✓ Sim</span></td>
+                <td>Muito intuitivo!</td>
+              </tr>
+              <tr>
+                <td><strong>Maria Santos</strong></td>
+                <td>Pequeno Comércio</td>
+                <td><span class="score good">Bom</span></td>
+                <td><span class="yes">✓ Sim</span></td>
+                <td><span class="yes">✓ Sim</span></td>
+                <td>Agregar histórico de coletas</td>
+              </tr>
+              <tr>
+                <td><strong>Pedro Oliveira</strong></td>
+                <td>Morador</td>
+                <td><span class="score excellent">Excelente</span></td>
+                <td><span class="yes">✓ Sim</span></td>
+                <td><span class="yes">✓ Sim</span></td>
+                <td>Notificações em tempo real</td>
+              </tr>
+              <tr>
+                <td><strong>Ana Costa</strong></td>
+                <td>Pequeno Comércio</td>
+                <td><span class="score good">Bom</span></td>
+                <td><span class="yes">✓ Sim</span></td>
+                <td><span class="yes">✓ Sim</span></td>
+                <td>Simplificar etapas iniciais</td>
+              </tr>
+              <tr>
+                <td><strong>Carlos Mendes</strong></td>
+                <td>Morador</td>
+                <td><span class="score excellent">Excelente</span></td>
+                <td><span class="yes">✓ Sim</span></td>
+                <td><span class="yes">✓ Sim</span></td>
+                <td>Excelente iniciativa!</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRINCIPAIS RESULTADOS -->
+    <section class="section results">
+      <div class="container">
+        <h2 class="section-title">Principais Resultados</h2>
+        <div class="results-grid">
+          <div class="result-card">
+            <div class="result-icon">🚀</div>
+            <h3>100% de Aceitação</h3>
+            <p>Todos os usuários testados mostraram interesse em usar a solução.</p>
+          </div>
+          <div class="result-card">
+            <div class="result-icon">⭐</div>
+            <h3>Facilidade Comprovada</h3>
+            <p>Interface intuitiva e fácil de usar para diferentes perfis de usuários.</p>
+          </div>
+          <div class="result-card">
+            <div class="result-icon">🌱</div>
+            <h3>Impacto Ambiental</h3>
+            <p>Solução viável para aumentar a taxa de reciclagem na região.</p>
+          </div>
+          <div class="result-card">
+            <div class="result-icon">💡</div>
+            <h3>Oportunidade de Mercado</h3>
+            <p>Demanda potencial entre moradores e pequenos comércios.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PONTOS DE MELHORIA -->
+    <section class="section improvements">
+      <div class="container">
+        <h2 class="section-title">Pontos de Melhoria Identificados</h2>
+        <div class="improvements-list">
+          <div class="improvement-item">
+            <div class="improvement-icon">🎨</div>
+            <div class="improvement-content">
+              <h3>Interface Mais Simples</h3>
+              <p>Reduzir poluição visual e disponibilizar apenas funcionalidades essenciais na tela principal.</p>
+            </div>
+          </div>
+          <div class="improvement-item">
+            <div class="improvement-icon">🔔</div>
+            <div class="improvement-content">
+              <h3>Notificações em Tempo Real</h3>
+              <p>Informar usuários sobre status da coleta, confirmação e saída do coletor.</p>
+            </div>
+          </div>
+          <div class="improvement-item">
+            <div class="improvement-icon">⚡</div>
+            <div class="improvement-content">
+              <h3>Redução de Etapas</h3>
+              <p>Simplificar o fluxo de cadastro e solicitação de coleta para 2-3 passos.</p>
+            </div>
+          </div>
+          <div class="improvement-item">
+            <div class="improvement-icon">📱</div>
+            <div class="improvement-content">
+              <h3>Melhor Responsividade</h3>
+              <p>Otimizar experiência móvel, principal canal de acesso dos usuários.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONCLUSÃO -->
+    <section class="section conclusion">
+      <div class="container">
+        <div class="conclusion-box">
+          <h2 class="section-title">Conclusão da Validação</h2>
+          <p class="conclusion-text">
+            O MVP do <strong>Balneário Limpa</strong> foi <strong>validado com sucesso</strong> junto a usuários reais. Os testes confirmaram que a solução é:
+          </p>
+          <ul class="conclusion-list">
+            <li>✓ <strong>Funcional:</strong> Usuários conseguem realizar coletas com facilidade</li>
+            <li>✓ <strong>Intuitiva:</strong> Interface clara e fácil de navegar</li>
+            <li>✓ <strong>Relevante:</strong> Soluciona um problema real da comunidade</li>
+            <li>✓ <strong>Escalável:</strong> Potencial para expansão regional</li>
+          </ul>
+          <p class="conclusion-text highlight-text">
+            Com os ajustes propostos, o <strong>Balneário Limpa</strong> está pronto para a próxima fase de desenvolvimento e tem grande potencial de impacto social e ambiental.
+          </p>
+          <button class="cta-button" onclick="simularTeste()">🧪 Simular Teste com Usuário</button>
+          <div id="test-message" class="test-message"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- RODAPÉ -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2026 Balneário Limpa - Projeto MVP e Validação Acadêmica</p>
+      <p class="footer-subtitle">Desenvolvido com 💚 para um futuro mais sustentável</p>
+      <p class="footer-info">
+        <a href="#" onclick="alert('Repositório: github.com/balneario-limpa'); return false;">📦 GitHub</a> |
+        <a href="#" onclick="alert('Email: contato@balneario-limpa.com'); return false;">📧 Contato</a> |
+        <a href="#" onclick="alert('Versão 1.0 - MVP'); return false;">ℹ️ Sobre</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
